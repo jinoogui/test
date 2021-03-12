@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="8cd21fd3-f7f1-4a96-8412-af8dace05471" name="默认的" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectId" id="1mrM9tRdbqtb86K5q6FRM3cwFrl" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/" />
+      <recent name="$PROJECT_DIR$/home/" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8cd21fd3-f7f1-4a96-8412-af8dace05471" name="默认的" comment="" />
+      <created>1610247108246</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1610247108246</updated>
+      <workItem from="1610247109365" duration="3810000" />
+      <workItem from="1610328144140" duration="2882000" />
+      <workItem from="1611026391287" duration="877000" />
+      <workItem from="1611046190561" duration="899000" />
+      <workItem from="1611105056641" duration="7296000" />
+      <workItem from="1611824626035" duration="306000" />
+      <workItem from="1613707224534" duration="503000" />
+      <workItem from="1613712983770" duration="118000" />
+      <workItem from="1613713127494" duration="2318000" />
+      <workItem from="1613716206005" duration="2272000" />
+      <workItem from="1615511148488" duration="2858000" />
+      <workItem from="1615527295998" duration="2522000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="469" y="139" key="#选项" timestamp="1615527311872">
+      <screen x="0" y="25" width="1440" height="875" />
+    </state>
+    <state x="469" y="139" key="#选项/1440.25.1024.743/0.25.1440.875@0.25.1440.875" timestamp="1615527311872" />
+    <state x="320" y="125" key="#部署" timestamp="1615530826104">
+      <screen x="0" y="25" width="1440" height="875" />
+    </state>
+    <state x="320" y="125" key="#部署/1440.25.1024.743/0.25.1440.875@0.25.1440.875" timestamp="1615530826104" />
+    <state x="479" y="336" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1615531075786">
+      <screen x="0" y="25" width="1440" height="875" />
+    </state>
+    <state x="479" y="336" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/1440.25.1024.743/0.25.1440.875@0.25.1440.875" timestamp="1615531075786" />
+    <state x="587" y="363" key="Github.ShareDialog" timestamp="1615537615330">
+      <screen x="0" y="25" width="1440" height="875" />
+    </state>
+    <state x="587" y="363" key="Github.ShareDialog/1440.25.1024.743/0.25.1440.875@0.25.1440.875" timestamp="1615537615330" />
+    <state x="168" y="51" key="SettingsEditor" timestamp="1615537736033">
+      <screen x="0" y="25" width="1440" height="875" />
+    </state>
+    <state x="149" y="48" key="SettingsEditor/0.25.1280.775@0.25.1280.775" timestamp="1613713293717" />
+    <state x="168" y="51" key="SettingsEditor/1440.25.1024.743/0.25.1440.875@0.25.1440.875" timestamp="1615537736033" />
+    <state x="579" y="365" key="WebDeployment.AddServerDialog.v.1" timestamp="1615527411322">
+      <screen x="0" y="25" width="1440" height="875" />
+    </state>
+    <state x="579" y="365" key="WebDeployment.AddServerDialog.v.1/1440.25.1024.743/0.25.1440.875@0.25.1440.875" timestamp="1615527411322" />
+    <state x="596" y="358" key="publish.login" timestamp="1615527517692">
+      <screen x="0" y="25" width="1440" height="875" />
+    </state>
+    <state x="596" y="358" key="publish.login/1440.25.1024.743/0.25.1440.875@0.25.1440.875" timestamp="1615527517692" />
+  </component>
+</project>

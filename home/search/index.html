@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>系统发生错误</title>
+    <meta name="robots" content="noindex,nofollow" />
+    <style>/* Base */
+        body {
+            color: #333;
+            font: 16px Verdana, "Helvetica Neue", helvetica, Arial, 'Microsoft YaHei', sans-serif;
+            margin: 0;
+            padding: 0 20px 20px;
+        }
+        h1{
+            margin: 10px 0 0;
+            font-size: 28px;
+            font-weight: 500;
+            line-height: 32px;
+        }
+        h2{
+            color: #4288ce;
+            font-weight: 400;
+            padding: 6px 0;
+            margin: 6px 0 0;
+            font-size: 18px;
+            border-bottom: 1px solid #eee;
+        }
+        h3{
+            margin: 12px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        abbr{
+            cursor: help;
+            text-decoration: underline;
+            text-decoration-style: dotted;
+        }
+        a{
+            color: #868686;
+            cursor: pointer;
+        }
+        a:hover{
+            text-decoration: underline;
+        }
+        .line-error{
+            background: #f8cbcb;
+        }
+        .echo table {
+            width: 100%;
+        }
+        .echo pre {
+            padding: 16px;
+            overflow: auto;
+            font-size: 85%;
+            line-height: 1.45;
+            background-color: #f7f7f7;
+            border: 0;
+            border-radius: 3px;
+            font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+        }
+        .echo pre > pre {
+            padding: 0;
+            margin: 0;
+        }
+        /* Exception Info */
+        .exception {
+            margin-top: 20px;
+        }
+        .exception .message{
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-bottom: 0 none;
+            line-height: 18px;
+            font-size:16px;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            font-family: Consolas,"Liberation Mono",Courier,Verdana,"微软雅黑",serif;
+        }
+        .exception .code{
+            float: left;
+            text-align: center;
+            color: #fff;
+            margin-right: 12px;
+            padding: 16px;
+            border-radius: 4px;
+            background: #999;
+        }
+        .exception .source-code{
+            padding: 6px;
+            border: 1px solid #ddd;
+
+            background: #f9f9f9;
+            overflow-x: auto;
+
+        }
+        .exception .source-code pre{
+            margin: 0;
+        }
+        .exception .source-code pre ol{
+            margin: 0;
+            color: #4288ce;
+            display: inline-block;
+            min-width: 100%;
+            box-sizing: border-box;
+            font-size:14px;
+            font-family: "Century Gothic",Consolas,"Liberation Mono",Courier,Verdana,serif;
+            padding-left: 40px;
+        }
+        .exception .source-code pre li{
+            border-left: 1px solid #ddd;
+            height: 18px;
+            line-height: 18px;
+        }
+        .exception .source-code pre code{
+            color: #333;
+            height: 100%;
+            display: inline-block;
+            border-left: 1px solid #fff;
+            font-size:14px;
+            font-family: Consolas,"Liberation Mono",Courier,Verdana,"微软雅黑",serif;
+        }
+        .exception .trace{
+            padding: 6px;
+            border: 1px solid #ddd;
+            border-top: 0 none;
+            line-height: 16px;
+            font-size:14px;
+            font-family: Consolas,"Liberation Mono",Courier,Verdana,"微软雅黑",serif;
+        }
+        .exception .trace h2:hover {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        .exception .trace ol{
+            margin: 12px;
+        }
+        .exception .trace ol li{
+            padding: 2px 4px;
+        }
+        .exception div:last-child{
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
+        }
+
+        /* Exception Variables */
+        .exception-var table{
+            width: 100%;
+            margin: 12px 0;
+            box-sizing: border-box;
+            table-layout:fixed;
+            word-wrap:break-word;
+        }
+        .exception-var table caption{
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 6px 0;
+        }
+        .exception-var table caption small{
+            font-weight: 300;
+            display: inline-block;
+            margin-left: 10px;
+            color: #ccc;
+        }
+        .exception-var table tbody{
+            font-size: 13px;
+            font-family: Consolas, "Liberation Mono", Courier, "微软雅黑",serif;
+        }
+        .exception-var table td{
+            padding: 0 6px;
+            vertical-align: top;
+            word-break: break-all;
+        }
+        .exception-var table td:first-child{
+            width: 28%;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        .exception-var table td pre{
+            margin: 0;
+        }
+
+        /* Copyright Info */
+        .copyright{
+            margin-top: 24px;
+            padding: 12px 0;
+            border-top: 1px solid #eee;
+        }
+
+        /* SPAN elements with the classes below are added by prettyprint. */
+        pre.prettyprint .pln { color: #000 }  /* plain text */
+        pre.prettyprint .str { color: #080 }  /* string content */
+        pre.prettyprint .kwd { color: #008 }  /* a keyword */
+        pre.prettyprint .com { color: #800 }  /* a comment */
+        pre.prettyprint .typ { color: #606 }  /* a type name */
+        pre.prettyprint .lit { color: #066 }  /* a literal value */
+        /* punctuation, lisp open bracket, lisp close bracket */
+        pre.prettyprint .pun, pre.prettyprint .opn, pre.prettyprint .clo { color: #660 }
+        pre.prettyprint .tag { color: #008 }  /* a markup tag name */
+        pre.prettyprint .atn { color: #606 }  /* a markup attribute name */
+        pre.prettyprint .atv { color: #080 }  /* a markup attribute value */
+        pre.prettyprint .dec, pre.prettyprint .var { color: #606 }  /* a declaration; a variable name */
+        pre.prettyprint .fun { color: red }  /* a function name */
+    </style>
+</head>
+<body>
+                <div class="exception">
+        <div class="message">
+            <div class="info">
+                <div>
+                    <h2>#0 [8]<abbr title="think\exception\ErrorException">ErrorException</abbr> in <a class="toggle" title="/www/wwwroot/adminevada.12-one.cn/app/home/controller/Search.php line 114">Search.php line 114</a></h2>
+                </div>
+                <div><h1>未定义数组索引: keywords</h1></div>
+            </div>
+        </div>
+                            <div class="source-code">
+                    <pre class="prettyprint lang-php"><ol start="105"><li class="line-0-105"><code>
+</code></li><li class="line-0-106"><code>                }
+</code></li><li class="line-0-107"><code>            }
+</code></li><li class="line-0-108"><code>        }
+</code></li><li class="line-0-109"><code>        View::assign(array('productnav'=&gt;$productnav));
+</code></li><li class="line-0-110"><code>
+</code></li><li class="line-0-111"><code>    }
+</code></li><li class="line-0-112"><code>    public function index()
+</code></li><li class="line-0-113"><code>    {
+</code></li><li class="line-0-114 line-error"><code>        $keywords = $_GET['keywords']?$_GET['keywords']:'';
+</code></li><li class="line-0-115"><code>        $category1 = new ArticleCategory();
+</code></li><li class="line-0-116"><code>        //banner图
+</code></li><li class="line-0-117"><code>        $cate_id = isset($_GET['cate_id'])?$_GET['cate_id']:12;
+</code></li><li class="line-0-118"><code>        $banner = array();
+</code></li><li class="line-0-119"><code>        $banner = $category1-&gt;where('id',$cate_id)-&gt;value('image');
+</code></li><li class="line-0-120"><code>        View::assign(array('banner'=&gt;$banner));
+</code></li><li class="line-0-121"><code>        if($keywords){
+</code></li><li class="line-0-122"><code>            $list1 = $this-&gt;model-&gt;whereLike('title', '%' . $keywords . '%')-&gt;order('create_time desc')-&gt;select()-&gt;toArray();
+</code></li><li class="line-0-123"><code>            View::assign(array('list1'=&gt;$list1));
+</code></li></ol></pre>
+                </div>
+                    <div class="trace">
+            <h2 data-expand="1">Call Stack</h2>
+            <ol>
+                <li>in <a class="toggle" title="/www/wwwroot/adminevada.12-one.cn/app/home/controller/Search.php line 114">Search.php line 114</a></li>
+                                    <li>
+                        at <abbr title="think\initializer\Error">Error</abbr>->appError(8, '<a class="toggle" title="Undefined index: keywords">Undefined index: key...</a>', '<a class="toggle" title="/www/wwwroot/adminevada.12-one.cn/app/home/controller/Search.php">/www/wwwroot/adminev...</a>', 114, []) in <a class="toggle" title="/www/wwwroot/adminevada.12-one.cn/app/home/controller/Search.php line 114">Search.php line 114</a>                    </li>
+                                    <li>
+                        at <abbr title="app\home\controller\Search">Search</abbr>->index()                    </li>
+                                    <li>
+                        at <abbr title="ReflectionMethod">ReflectionMethod</abbr>->invokeArgs(<em>object</em>(<abbr title="app\home\controller\Search">Search</abbr>), []) in <a class="toggle" title="/www/wwwroot/adminevada.12-one.cn/vendor/topthink/framework/src/think/Container.php line 342">Container.php line 342</a>                    </li>
+                                    <li>
+                        at <abbr title="think\Container">Container</abbr>->invokeReflectMethod(<em>object</em>(<abbr title="app\home\controller\Search">Search</abbr>), <em>object</em>(<abbr title="ReflectionMethod">ReflectionMethod</abbr>), []) in <a class="toggle" title="/www/wwwroot/adminevada.12-one.cn/vendor/topthink/framework/src/think/route/dispatch/Controller.php line 110">Controller.php line 110</a>                    </li>
+                                    <li>
+                        at <abbr title="think\route\dispatch\Controller">Controller</abbr>->think\route\dispatch\{closure}(<em>object</em>(<abbr title="app\Request">Request</abbr>)) in <a class="toggle" title="/www/wwwroot/adminevada.12-one.cn/vendor/topthink/framework/src/think/Pipeline.php line 59">Pipeline.php line 59</a>                    </li>
+                                    <li>
+                        at <abbr title="think\Pipeline">Pipeline</abbr>->think\{closure}(<em>object</em>(<abbr title="app\Request">Request</abbr>)) in <a class="toggle" title="/www/wwwroot/adminevada.12-one.cn/vendor/topthink/framework/src/think/Pipeline.php line 65">Pipeline.php line 65</a>                    </li>
+                                    <li>
+                        at <abbr title="think\Pipeline">Pipeline</abbr>->then(<em>object</em>(<abbr title="Closure">Closure</abbr>)) in <a class="toggle" title="/www/wwwroot/adminevada.12-one.cn/vendor/topthink/framework/src/think/route/dispatch/Controller.php line 113">Controller.php line 113</a>                    </li>
+                                    <li>
+                        at <abbr title="think\route\dispatch\Controller">Controller</abbr>->exec() in <a class="toggle" title="/www/wwwroot/adminevada.12-one.cn/vendor/topthink/framework/src/think/route/Dispatch.php line 89">Dispatch.php line 89</a>                    </li>
+                                    <li>
+                        at <abbr title="think\route\Dispatch">Dispatch</abbr>->run() in <a class="toggle" title="/www/wwwroot/adminevada.12-one.cn/vendor/topthink/framework/src/think/Route.php line 760">Route.php line 760</a>                    </li>
+                                    <li>
+                        at <abbr title="think\Route">Route</abbr>->think\{closure}(<em>object</em>(<abbr title="app\Request">Request</abbr>)) in <a class="toggle" title="/www/wwwroot/adminevada.12-one.cn/vendor/topthink/framework/src/think/Pipeline.php line 59">Pipeline.php line 59</a>                    </li>
+                                    <li>
+                        at <abbr title="think\Pipeline">Pipeline</abbr>->think\{closure}(<em>object</em>(<abbr title="app\Request">Request</abbr>)) in <a class="toggle" title="/www/wwwroot/adminevada.12-one.cn/vendor/topthink/framework/src/think/Pipeline.php line 65">Pipeline.php line 65</a>                    </li>
+                                    <li>
+                        at <abbr title="think\Pipeline">Pipeline</abbr>->then(<em>object</em>(<abbr title="Closure">Closure</abbr>)) in <a class="toggle" title="/www/wwwroot/adminevada.12-one.cn/vendor/topthink/framework/src/think/Route.php line 761">Route.php line 761</a>                    </li>
+                                    <li>
+                        at <abbr title="think\Route">Route</abbr>->dispatch(<em>object</em>(<abbr title="app\Request">Request</abbr>), <em>object</em>(<abbr title="Closure">Closure</abbr>)) in <a class="toggle" title="/www/wwwroot/adminevada.12-one.cn/vendor/topthink/framework/src/think/Http.php line 210">Http.php line 210</a>                    </li>
+                                    <li>
+                        at <abbr title="think\Http">Http</abbr>->dispatchToRoute(<em>object</em>(<abbr title="app\Request">Request</abbr>)) in <a class="toggle" title="/www/wwwroot/adminevada.12-one.cn/vendor/topthink/framework/src/think/Http.php line 200">Http.php line 200</a>                    </li>
+                                    <li>
+                        at <abbr title="think\Http">Http</abbr>->think\{closure}(<em>object</em>(<abbr title="app\Request">Request</abbr>)) in <a class="toggle" title="/www/wwwroot/adminevada.12-one.cn/vendor/topthink/framework/src/think/Pipeline.php line 59">Pipeline.php line 59</a>                    </li>
+                                    <li>
+                        at <abbr title="think\Pipeline">Pipeline</abbr>->think\{closure}(<em>object</em>(<abbr title="app\Request">Request</abbr>)) in <a class="toggle" title="/www/wwwroot/adminevada.12-one.cn/vendor/topthink/think-multi-app/src/MultiApp.php line 71">MultiApp.php line 71</a>                    </li>
+                                    <li>
+                        at <abbr title="think\app\MultiApp">MultiApp</abbr>->think\app\{closure}(<em>object</em>(<abbr title="app\Request">Request</abbr>)) in <a class="toggle" title="/www/wwwroot/adminevada.12-one.cn/vendor/topthink/framework/src/think/Pipeline.php line 59">Pipeline.php line 59</a>                    </li>
+                                    <li>
+                        at <abbr title="think\Pipeline">Pipeline</abbr>->think\{closure}(<em>object</em>(<abbr title="app\Request">Request</abbr>)) in <a class="toggle" title="/www/wwwroot/adminevada.12-one.cn/vendor/topthink/framework/src/think/Pipeline.php line 65">Pipeline.php line 65</a>                    </li>
+                                    <li>
+                        at <abbr title="think\Pipeline">Pipeline</abbr>->then(<em>object</em>(<abbr title="Closure">Closure</abbr>)) in <a class="toggle" title="/www/wwwroot/adminevada.12-one.cn/vendor/topthink/think-multi-app/src/MultiApp.php line 72">MultiApp.php line 72</a>                    </li>
+                                    <li>
+                        at <abbr title="think\app\MultiApp">MultiApp</abbr>->handle(<em>object</em>(<abbr title="app\Request">Request</abbr>), <em>object</em>(<abbr title="Closure">Closure</abbr>))                    </li>
+                                    <li>
+                        at call_user_func([<em>object</em>(<abbr title="think\app\MultiApp">MultiApp</abbr>), 'handle'], <em>object</em>(<abbr title="app\Request">Request</abbr>), <em>object</em>(<abbr title="Closure">Closure</abbr>)) in <a class="toggle" title="/www/wwwroot/adminevada.12-one.cn/vendor/topthink/framework/src/think/Middleware.php line 142">Middleware.php line 142</a>                    </li>
+                                    <li>
+                        at <abbr title="think\Middleware">Middleware</abbr>->think\{closure}(<em>object</em>(<abbr title="app\Request">Request</abbr>), <em>object</em>(<abbr title="Closure">Closure</abbr>)) in <a class="toggle" title="/www/wwwroot/adminevada.12-one.cn/vendor/topthink/framework/src/think/Pipeline.php line 84">Pipeline.php line 84</a>                    </li>
+                                    <li>
+                        at <abbr title="think\Pipeline">Pipeline</abbr>->think\{closure}(<em>object</em>(<abbr title="app\Request">Request</abbr>)) in <a class="toggle" title="/www/wwwroot/adminevada.12-one.cn/vendor/topthink/framework/src/think/middleware/AllowCrossDomain.php line 61">AllowCrossDomain.php line 61</a>                    </li>
+                                    <li>
+                        at <abbr title="think\middleware\AllowCrossDomain">AllowCrossDomain</abbr>->handle(<em>object</em>(<abbr title="app\Request">Request</abbr>), <em>object</em>(<abbr title="Closure">Closure</abbr>))                    </li>
+                                    <li>
+                        at call_user_func([<em>object</em>(<abbr title="think\middleware\AllowCrossDomain">AllowCrossDomain</abbr>), 'handle'], <em>object</em>(<abbr title="app\Request">Request</abbr>), <em>object</em>(<abbr title="Closure">Closure</abbr>)) in <a class="toggle" title="/www/wwwroot/adminevada.12-one.cn/vendor/topthink/framework/src/think/Middleware.php line 142">Middleware.php line 142</a>                    </li>
+                                    <li>
+                        at <abbr title="think\Middleware">Middleware</abbr>->think\{closure}(<em>object</em>(<abbr title="app\Request">Request</abbr>), <em>object</em>(<abbr title="Closure">Closure</abbr>)) in <a class="toggle" title="/www/wwwroot/adminevada.12-one.cn/vendor/topthink/framework/src/think/Pipeline.php line 84">Pipeline.php line 84</a>                    </li>
+                                    <li>
+                        at <abbr title="think\Pipeline">Pipeline</abbr>->think\{closure}(<em>object</em>(<abbr title="app\Request">Request</abbr>)) in <a class="toggle" title="/www/wwwroot/adminevada.12-one.cn/vendor/topthink/framework/src/think/Pipeline.php line 65">Pipeline.php line 65</a>                    </li>
+                                    <li>
+                        at <abbr title="think\Pipeline">Pipeline</abbr>->then(<em>object</em>(<abbr title="Closure">Closure</abbr>)) in <a class="toggle" title="/www/wwwroot/adminevada.12-one.cn/vendor/topthink/framework/src/think/Http.php line 201">Http.php line 201</a>                    </li>
+                                    <li>
+                        at <abbr title="think\Http">Http</abbr>->runWithRequest(<em>object</em>(<abbr title="app\Request">Request</abbr>)) in <a class="toggle" title="/www/wwwroot/adminevada.12-one.cn/vendor/topthink/framework/src/think/Http.php line 162">Http.php line 162</a>                    </li>
+                                    <li>
+                        at <abbr title="think\Http">Http</abbr>->run() in <a class="toggle" title="/www/wwwroot/adminevada.12-one.cn/public/index.php line 31">index.php line 31</a>                    </li>
+                            </ol>
+        </div>
+    </div>
+                
+    
+        <div class="exception-var">
+        <h2>Environment Variables</h2>
+                <table>
+                        <caption>GET Data<small>empty</small></caption>
+                    </table>
+                <table>
+                        <caption>POST Data<small>empty</small></caption>
+                    </table>
+                <table>
+                        <caption>Files<small>empty</small></caption>
+                    </table>
+                <table>
+                        <caption>Cookies<small>empty</small></caption>
+                    </table>
+                <table>
+                        <caption>Session<small>empty</small></caption>
+                    </table>
+                <table>
+                        <caption>Server/Request Data</caption>
+            <tbody>
+                                <tr>
+                    <td>USER</td>
+                    <td>www</td>
+                </tr>
+                                <tr>
+                    <td>HOME</td>
+                    <td>/home/www</td>
+                </tr>
+                                <tr>
+                    <td>HTTP_ACCEPT_ENCODING</td>
+                    <td>gzip, deflate</td>
+                </tr>
+                                <tr>
+                    <td>HTTP_REFERER</td>
+                    <td>http://www.evadaups.com/</td>
+                </tr>
+                                <tr>
+                    <td>HTTP_ACCEPT_LANGUAGE</td>
+                    <td>zh-cn</td>
+                </tr>
+                                <tr>
+                    <td>HTTP_USER_AGENT</td>
+                    <td>SiteSucker for macOS/3.2.3</td>
+                </tr>
+                                <tr>
+                    <td>HTTP_ACCEPT</td>
+                    <td>text/html,*/*;q=0.8</td>
+                </tr>
+                                <tr>
+                    <td>HTTP_CONNECTION</td>
+                    <td>keep-alive</td>
+                </tr>
+                                <tr>
+                    <td>HTTP_HOST</td>
+                    <td>www.evadaups.com</td>
+                </tr>
+                                <tr>
+                    <td>PATH_INFO</td>
+                    <td></td>
+                </tr>
+                                <tr>
+                    <td>REDIRECT_STATUS</td>
+                    <td>200</td>
+                </tr>
+                                <tr>
+                    <td>SERVER_NAME</td>
+                    <td>adminevada.12-one.cn</td>
+                </tr>
+                                <tr>
+                    <td>SERVER_PORT</td>
+                    <td>80</td>
+                </tr>
+                                <tr>
+                    <td>SERVER_ADDR</td>
+                    <td>172.16.173.226</td>
+                </tr>
+                                <tr>
+                    <td>REMOTE_PORT</td>
+                    <td>42366</td>
+                </tr>
+                                <tr>
+                    <td>REMOTE_ADDR</td>
+                    <td>47.242.61.186</td>
+                </tr>
+                                <tr>
+                    <td>SERVER_SOFTWARE</td>
+                    <td>nginx/1.8.1</td>
+                </tr>
+                                <tr>
+                    <td>GATEWAY_INTERFACE</td>
+                    <td>CGI/1.1</td>
+                </tr>
+                                <tr>
+                    <td>SERVER_PROTOCOL</td>
+                    <td>HTTP/1.1</td>
+                </tr>
+                                <tr>
+                    <td>DOCUMENT_ROOT</td>
+                    <td>/www/wwwroot/adminevada.12-one.cn/public</td>
+                </tr>
+                                <tr>
+                    <td>DOCUMENT_URI</td>
+                    <td>/index.php</td>
+                </tr>
+                                <tr>
+                    <td>REQUEST_URI</td>
+                    <td>/home/search/index.html</td>
+                </tr>
+                                <tr>
+                    <td>SCRIPT_NAME</td>
+                    <td>/index.php</td>
+                </tr>
+                                <tr>
+                    <td>CONTENT_LENGTH</td>
+                    <td></td>
+                </tr>
+                                <tr>
+                    <td>CONTENT_TYPE</td>
+                    <td></td>
+                </tr>
+                                <tr>
+                    <td>REQUEST_METHOD</td>
+                    <td>GET</td>
+                </tr>
+                                <tr>
+                    <td>QUERY_STRING</td>
+                    <td>s=/home/search/index.html</td>
+                </tr>
+                                <tr>
+                    <td>SCRIPT_FILENAME</td>
+                    <td>/www/wwwroot/adminevada.12-one.cn/public/index.php</td>
+                </tr>
+                                <tr>
+                    <td>FCGI_ROLE</td>
+                    <td>RESPONDER</td>
+                </tr>
+                                <tr>
+                    <td>PHP_SELF</td>
+                    <td>/index.php</td>
+                </tr>
+                                <tr>
+                    <td>REQUEST_TIME_FLOAT</td>
+                    <td>1610246833.0475</td>
+                </tr>
+                                <tr>
+                    <td>REQUEST_TIME</td>
+                    <td>1610246833</td>
+                </tr>
+                            </tbody>
+                    </table>
+            </div>
+    
+    <div class="copyright">
+        <a title="官方网站" href="http://www.thinkphp.cn">ThinkPHP</a> 
+        <span>V6.0.3</span> 
+        <span>{ 十年磨一剑-为API开发设计的高性能框架 }</span>
+        <span>- <a title="官方手册" href="https://www.kancloud.cn/manual/thinkphp6_0/content">官方手册</a></span>
+    </div>
+        <script>
+        function $(selector, node){
+            var elements;
+
+            node = node || document;
+            if(document.querySelectorAll){
+                elements = node.querySelectorAll(selector);
+            } else {
+                switch(selector.substr(0, 1)){
+                    case '#':
+                        elements = [node.getElementById(selector.substr(1))];
+                        break;
+                    case '.':
+                        if(document.getElementsByClassName){
+                            elements = node.getElementsByClassName(selector.substr(1));
+                        } else {
+                            elements = get_elements_by_class(selector.substr(1), node);
+                        }
+                        break;
+                    default:
+                        elements = node.getElementsByTagName();
+                }
+            }
+            return elements;
+
+            function get_elements_by_class(search_class, node, tag) {
+                var elements = [], eles, 
+                    pattern  = new RegExp('(^|\\s)' + search_class + '(\\s|$)');
+
+                node = node || document;
+                tag  = tag  || '*';
+
+                eles = node.getElementsByTagName(tag);
+                for(var i = 0; i < eles.length; i++) {
+                    if(pattern.test(eles[i].className)) {
+                        elements.push(eles[i])
+                    }
+                }
+
+                return elements;
+            }
+        }
+
+        $.getScript = function(src, func){
+            var script = document.createElement('script');
+            
+            script.async  = 'async';
+            script.src    = src;
+            script.onload = func || function(){};
+            
+            $('head')[0].appendChild(script);
+        }
+
+        ;(function(){
+            var files = $('.toggle');
+            var ol    = $('ol', $('.prettyprint')[0]);
+            var li    = $('li', ol[0]);   
+
+            // 短路径和长路径变换
+            for(var i = 0; i < files.length; i++){
+                files[i].ondblclick = function(){
+                    var title = this.title;
+
+                    this.title = this.innerHTML;
+                    this.innerHTML = title;
+                }
+            }
+
+            (function () {
+                var expand = function (dom, expand) {
+                    var ol = $('ol', dom.parentNode)[0];
+                    expand = undefined === expand ? dom.attributes['data-expand'].value === '0' : undefined;
+                    if (expand) {
+                        dom.attributes['data-expand'].value = '1';
+                        ol.style.display = 'none';
+                        dom.innerText = 'Call Stack (展开)';
+                    } else {
+                        dom.attributes['data-expand'].value = '0';
+                        ol.style.display = 'block';
+                        dom.innerText = 'Call Stack (折叠)';
+                    }
+                };
+                var traces = $('.trace');
+                for (var i = 0; i < traces.length; i ++) {
+                    var h2 = $('h2', traces[i])[0];
+                    expand(h2);
+                    h2.onclick = function () {
+                        expand(this);
+                    };
+                }
+            })();
+
+            $.getScript('//cdn.bootcss.com/prettify/r298/prettify.min.js', function(){
+                prettyPrint();
+            });
+        })();
+    </script>
+    </body>
+</html>
